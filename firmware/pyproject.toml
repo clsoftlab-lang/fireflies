@@ -1,0 +1,25 @@
+# SPDX-License-Identifier: Apache-2.0
+# SPDX-FileCopyrightText: 2026 CLSOFTLAB / Dr. Lee Il-guk (이일국) and Fireflies contributors
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fireflies-firmware"
+version = "0.1.0"
+description = "Pure, host-testable logic for the Fireflies sky-jellyfish unit and dispenser machine"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "Apache-2.0" }
+authors = [{ name = "CLSOFTLAB / Dr. Lee Il-guk (이일국) and Fireflies contributors" }]
+dependencies = []
+
+[project.optional-dependencies]
+test = ["pytest>=7"]
+
+[tool.setuptools]
+packages = ["firefly_unit", "dispenser"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

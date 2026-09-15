@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  SPDX-License-Identifier: CERN-OHL-P-2.0
+  SPDX-FileCopyrightText: 2026 CLSOFTLAB / Dr. Lee Il-guk (이일국) and Fireflies contributors
+  Fireflies sky-jellyfish UNIT wiring (reference). Spec sections 3, 3.1, 5, 5.1.
+  Schematic/connectivity diagram, not to scale. No radio; light is the only channel.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="620" viewBox="0 0 900 620" font-family="sans-serif">
+  <rect x="0" y="0" width="900" height="620" fill="#0b1020"/>
+  <text x="24" y="34" fill="#ffd27f" font-size="22" font-weight="bold">Fireflies sky-jellyfish unit — wiring (reference)</text>
+  <text x="24" y="56" fill="#9fb3c8" font-size="13">Amber base glow + capacitor-boost spark-flash + travelling-wave tendrils + phototransistor sync. Battery: smallest coin/film cell.</text>
+
+  <!-- Coin cell -->
+  <g>
+    <rect x="60" y="120" width="130" height="80" rx="8" fill="#132038" stroke="#ffd27f" stroke-width="2"/>
+    <text x="125" y="150" fill="#e6eef7" font-size="14" text-anchor="middle">Coin / film cell</text>
+    <text x="125" y="170" fill="#9fb3c8" font-size="12" text-anchor="middle">3 V, lightest</text>
+    <text x="125" y="188" fill="#9fb3c8" font-size="12" text-anchor="middle">that floats</text>
+    <text x="196" y="140" fill="#ff6b6b" font-size="13">+</text>
+    <text x="196" y="196" fill="#7fb0ff" font-size="13">−</text>
+  </g>
+
+  <!-- MCU -->
+  <g>
+    <rect x="330" y="110" width="200" height="150" rx="10" fill="#152a1f" stroke="#7CFC98" stroke-width="2"/>
+    <text x="430" y="138" fill="#c8ffd6" font-size="15" text-anchor="middle" font-weight="bold">MCU  ATtiny85 / 1616</text>
+    <text x="430" y="158" fill="#9fb3c8" font-size="11" text-anchor="middle">(or discrete analog blinker)</text>
+    <text x="345" y="188" fill="#e6eef7" font-size="11">VCC</text>
+    <text x="345" y="210" fill="#e6eef7" font-size="11">GND</text>
+    <text x="515" y="182" fill="#e6eef7" font-size="11" text-anchor="end">ADC ◄ photo</text>
+    <text x="515" y="204" fill="#e6eef7" font-size="11" text-anchor="end">PWM ► amber</text>
+    <text x="515" y="226" fill="#e6eef7" font-size="11" text-anchor="end">PWM ► white</text>
+    <text x="515" y="248" fill="#e6eef7" font-size="11" text-anchor="end">GATE ► flash</text>
+  </g>
+
+  <!-- Phototransistor -->
+  <g>
+    <rect x="330" y="330" width="200" height="70" rx="8" fill="#132038" stroke="#ffd27f" stroke-width="2"/>
+    <text x="430" y="360" fill="#e6eef7" font-size="14" text-anchor="middle">Phototransistor</text>
+    <text x="430" y="380" fill="#9fb3c8" font-size="11" text-anchor="middle">sees neighbour flashes → sync (§5)</text>
+  </g>
+
+  <!-- Capacitor flash stage on the bell -->
+  <g>
+    <rect x="620" y="110" width="220" height="120" rx="10" fill="#2a1f14" stroke="#ffb454" stroke-width="2"/>
+    <text x="730" y="138" fill="#ffd27f" font-size="14" text-anchor="middle" font-weight="bold">Bell flash stage (§5.1)</text>
+    <text x="730" y="160" fill="#9fb3c8" font-size="11" text-anchor="middle">boost cap → MOSFET → LED burst</text>
+    <text x="655" y="196" fill="#e6eef7" font-size="12">▮ boost capacitor</text>
+    <text x="655" y="216" fill="#e6eef7" font-size="12">◇ cool-white + amber LED</text>
+  </g>
+
+  <!-- Tendrils -->
+  <g>
+    <rect x="620" y="300" width="220" height="250" rx="10" fill="#101c2e" stroke="#7fd0ff" stroke-width="2"/>
+    <text x="730" y="326" fill="#bfe6ff" font-size="14" text-anchor="middle" font-weight="bold">Tendrils (3–8) — §3.1</text>
+    <text x="730" y="346" fill="#9fb3c8" font-size="11" text-anchor="middle">micro-LED string per strand</text>
+    <text x="730" y="362" fill="#9fb3c8" font-size="11" text-anchor="middle">travelling wave top→bottom</text>
+    <!-- strands -->
+    <g stroke="#7fd0ff" stroke-width="2" fill="#ffcf6b">
+      <line x1="660" y1="380" x2="660" y2="540"/><circle cx="660" cy="400" r="4"/><circle cx="660" cy="440" r="4"/><circle cx="660" cy="480" r="4"/><circle cx="660" cy="520" r="4"/>
+      <line x1="700" y1="380" x2="700" y2="540"/><circle cx="700" cy="410" r="4"/><circle cx="700" cy="450" r="4"/><circle cx="700" cy="490" r="4"/><circle cx="700" cy="530" r="4"/>
+      <line x1="740" y1="380" x2="740" y2="540"/><circle cx="740" cy="400" r="4"/><circle cx="740" cy="440" r="4"/><circle cx="740" cy="480" r="4"/><circle cx="740" cy="520" r="4"/>
+      <line x1="780" y1="380" x2="780" y2="540"/><circle cx="780" cy="410" r="4"/><circle cx="780" cy="450" r="4"/><circle cx="780" cy="490" r="4"/><circle cx="780" cy="530" r="4"/>
+    </g>
+  </g>
+
+  <!-- Wires -->
+  <g stroke-width="2.5" fill="none">
+    <!-- power + -->
+    <path d="M190 140 H 300 V 188 H 330" stroke="#ff6b6b"/>
+    <!-- power - -->
+    <path d="M190 185 H 280 V 210 H 330" stroke="#7fb0ff"/>
+    <!-- photo -> ADC -->
+    <path d="M430 330 V 300 H 560 V 182 H 530" stroke="#ffd27f"/>
+    <!-- MCU -> flash gate -->
+    <path d="M530 248 H 590 V 170 H 620" stroke="#ffb454"/>
+    <!-- MCU -> amber/white (to bell LEDs, shown entering flash stage) -->
+    <path d="M530 204 H 575 V 200 H 620" stroke="#ffcf6b"/>
+    <!-- MCU -> tendril string -->
+    <path d="M530 226 H 600 V 360 H 620" stroke="#7fd0ff"/>
+  </g>
+
+  <text x="24" y="600" fill="#5f7488" font-size="11">Reference connectivity only. Every gram of wiring/tendril must stay inside the balloon free-lift budget (see hardware/README.md). No ignition source anywhere.</text>
+</svg>

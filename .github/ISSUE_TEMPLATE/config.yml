@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Report a security or safety-security vulnerability privately
+    url: https://docs.github.com/en/code-security/security-advisories/guidance-on-reporting-and-writing-information-about-vulnerabilities/privately-reporting-a-security-vulnerability
+    about: Do not open a public issue. Use "Report a vulnerability" in this repository's Security tab (see SECURITY.md).
+  - name: Try the simulator
+    url: https://clsoftlab-lang.github.io/fireflies/sim/
+    about: The browser simulator is the landing experience - watch thousands of light-jellyfish drift and sync.

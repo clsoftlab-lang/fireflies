@@ -1,0 +1,12 @@
+{
+  "name": "fireflies-sim",
+  "version": "0.1.0",
+  "description": "Fireflies (반딧불이) browser simulator — sky-jellyfish drifting on the wind, blinking into synchrony. No build step.",
+  "type": "module",
+  "private": true,
+  "license": "Apache-2.0",
+  "scripts": {
+    "test": "node --test tests/",
+    "serve": "python -m http.server 8130"
+  }
+}

@@ -1,0 +1,85 @@
+name: Show report
+description: Share what happened at a real Fireflies show or bench test - counts, sync, recovery. Honest results, good or bad, help everyone. (한국어로 작성하셔도 됩니다.)
+title: "[Show] "
+labels: ["show-report"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for flying and reporting. Please follow docs/en/03-safety-and-airspace.md and
+        docs/en/04-leave-no-trace.md. **Do not include faces, exact home/work addresses, or phone numbers.**
+        Only attach photos or video if everyone identifiable agreed. Failures are as valuable as successes.
+  - type: dropdown
+    id: mode
+    attributes:
+      label: Mode
+      options:
+        - Simulator only
+        - Indoor
+        - Tethered (outdoor, retrievable)
+        - Free release (permitted)
+    validations:
+      required: true
+  - type: input
+    id: permit
+    attributes:
+      label: Permit (free release only)
+      description: Authority and reference number, or "N/A - indoor/tethered".
+    validations:
+      required: false
+  - type: input
+    id: released
+    attributes:
+      label: Units released
+    validations:
+      required: true
+  - type: input
+    id: recovered
+    attributes:
+      label: Units recovered / accounted for
+      description: For leave-no-trace, this should equal the number released.
+    validations:
+      required: true
+  - type: dropdown
+    id: incident
+    attributes:
+      label: Any safety incident?
+      description: An incident is an injury, a helium/battery problem, or a unit going somewhere it should not.
+      options:
+        - "None"
+        - "Near miss (someone had to intervene)"
+        - "Incident occurred"
+    validations:
+      required: true
+  - type: textarea
+    id: sync
+    attributes:
+      label: How was the sync and drift?
+      description: Did flashes fall into unison? How did the wind/tethers behave? Roughly what settings?
+    validations:
+      required: false
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened, and what would you change?
+      description: Setup, weather, what worked, what did not, lessons for next time.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Firmware / hardware version
+      description: Commit or release, and any deviation from the reference build.
+    validations:
+      required: false
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: I followed the safety and leave-no-trace guides.
+          required: true
+        - label: Released count equals recovered/accounted count, or I explained the difference above.
+          required: true
+        - label: I removed personal information, and have consent for any media I attached.
+          required: true

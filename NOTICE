@@ -1,0 +1,36 @@
+Fireflies (반딧불이)
+Copyright 2026 CLSOFTLAB (씨엘소프트랩), Dr. Lee Il-guk (이일국)
+
+An open, gentle night-sky art project: hundreds of tiny helium sky-jellyfish
+released into the air and left to drift on the wind, blinking in slow, self-
+organising synchrony. Designed with Claude (Anthropic's AI). This is NOT an
+Anthropic product and is not endorsed by or affiliated with Anthropic.
+
+Licensing of this repository
+----------------------------
+- Software (sim/, firmware/, scripts, CI):  Apache License 2.0
+    LICENSES/Apache-2.0.txt
+- Hardware design files (hardware/: OpenSCAD sources, STL, wiring):
+    CERN Open Hardware Licence Version 2 - Permissive (CERN-OHL-P-2.0)
+    LICENSES/CERN-OHL-P-2.0.txt
+- Documentation (docs/, README files, images):
+    Creative Commons Attribution 4.0 International (CC BY 4.0)
+    LICENSES/CC-BY-4.0.txt
+
+The full three-licence summary is in LICENSE.
+
+Contributors
+------------
+- Dr. Lee Il-guk (이일국), CLSOFTLAB (씨엘소프트랩) - project lead and design
+- LWJ - contributor (high-school student, Gyeonggi-do)
+- LMJ - contributor (middle-school student, Gyeonggi-do)
+- Claude (Anthropic's AI) - design collaborator
+
+Safety
+------
+The default operating mode is indoor or tethered (retrievable). Free wind-
+release is advanced and requires permits and coordination with aviation
+authorities (in Korea, the Aviation Safety Act / 항공안전법). Helium is an
+asphyxiant in enclosed spaces and cylinders are high-pressure. A firefly is
+not litter: released count must equal recovered count. See docs/en/03-safety-
+and-airspace.md and docs/en/04-leave-no-trace.md.

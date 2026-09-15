@@ -1,0 +1,117 @@
+<!--
+SPDX-License-Identifier: Apache-2.0
+Copyright 2026 CLSOFTLAB (씨엘소프트랩), Dr. Lee Il-guk (이일국)
+
+Fireflies (반딧불이) — browser simulator. Single page, no build step, no network.
+Sky-jellyfish (해파리) drift on the wind, tendrils swaying, light flowing down
+them, bells blinking into self-organising synchrony. See docs/en/00-design-spec.md.
+-->
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="dark light" />
+  <title>Fireflies (반딧불이) — sky-jellyfish simulator</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <!-- The night sky. Fireflies drift here. -->
+  <canvas id="sky" aria-label="Night sky with drifting, blinking sky-jellyfish"></canvas>
+
+  <!-- Skip link for keyboard users -->
+  <a class="skip-link" href="#controls">Skip to controls</a>
+
+  <header class="titlebar">
+    <h1><span class="glyph" aria-hidden="true">✦</span> Fireflies <span class="ko">반딧불이</span></h1>
+    <button id="panelToggle" class="ghost" aria-expanded="true" aria-controls="controls">
+      Hide controls
+    </button>
+  </header>
+
+  <!-- Live status, announced to assistive tech -->
+  <div class="hud" role="status" aria-live="polite">
+    <span id="fps" class="hud-item">-- FPS</span>
+    <span id="countReadout" class="hud-item">0 jellyfish</span>
+    <span id="syncReadout" class="hud-item">sync: --</span>
+  </div>
+
+  <main id="controls" class="panel" aria-label="Simulation controls">
+    <div class="row primary">
+      <button id="startBtn" class="primary-btn" aria-pressed="true">Pause releasing</button>
+      <button id="pauseBtn" class="ghost" aria-pressed="false">Freeze scene</button>
+      <button id="resetBtn" class="ghost">New sky</button>
+    </div>
+
+    <p class="hint" id="statusLine">Releasing sky-jellyfish from the dispenser…</p>
+
+    <fieldset>
+      <legend>Swarm</legend>
+      <label for="count">Count <output id="countOut">300</output></label>
+      <input id="count" type="range" min="20" max="3000" step="10" value="300"
+             aria-describedby="countHelp" />
+      <p id="countHelp" class="sr-note">Up to a few thousand; auto-reduces if the frame rate drops.</p>
+
+      <label for="wind">Wind strength <output id="windOut">55</output></label>
+      <input id="wind" type="range" min="0" max="140" step="1" value="55" />
+
+      <label for="motion">Motion</label>
+      <select id="motion">
+        <option value="full">Full drift</option>
+        <option value="reduced">Reduced (slow)</option>
+        <option value="still">Nearly still</option>
+      </select>
+    </fieldset>
+
+    <fieldset>
+      <legend>Blink &amp; synchrony</legend>
+      <label for="period">Blink period T <output id="periodOut">1.6 s</output></label>
+      <input id="period" type="range" min="0.6" max="3.5" step="0.1" value="1.6" />
+
+      <label for="coupling">Coupling ε <output id="couplingOut">0.09</output></label>
+      <input id="coupling" type="range" min="0" max="0.4" step="0.005" value="0.09"
+             aria-describedby="couplingHelp" />
+      <p id="couplingHelp" class="sr-note">Higher ε → the swarm falls into unison faster. 0 → each blinks alone.</p>
+    </fieldset>
+
+    <fieldset>
+      <legend>Tendrils</legend>
+      <label for="tcount">Tendrils per bell <output id="tcountOut">5</output></label>
+      <input id="tcount" type="range" min="0" max="8" step="1" value="5" />
+
+      <label for="tlen">Tendril length <output id="tlenOut">72</output></label>
+      <input id="tlen" type="range" min="20" max="140" step="2" value="72" />
+    </fieldset>
+
+    <fieldset>
+      <legend>Light</legend>
+      <label for="spark">Spark colour: amber → cool blue <output id="sparkOut">30%</output></label>
+      <input id="spark" type="range" min="0" max="100" step="1" value="30"
+             aria-describedby="sparkHelp" />
+      <p id="sparkHelp" class="sr-note">Mix of cool white/blue into the capacitor spark-flash.</p>
+
+      <label for="glow">Glow / bloom <output id="glowOut">1.0</output></label>
+      <input id="glow" type="range" min="0.3" max="2" step="0.05" value="1.0" />
+    </fieldset>
+
+    <details class="about">
+      <summary>About this simulator</summary>
+      <p>
+        Each jellyfish only <em>floats and blinks</em> — no steering, no formation.
+        The wind does the choreography; the bells nudge their blink toward the
+        neighbours they can see (a pulse-coupled oscillator), so unison emerges
+        with no leader. This is a simulation, not an Anthropic product.
+      </p>
+    </details>
+  </main>
+
+  <footer class="footer">
+    <span>Leave no trace · not an Anthropic product</span>
+    <a id="repoLink" href="https://github.com/clsoftlab-lang/fireflies" rel="noopener noreferrer">
+      github.com/clsoftlab-lang/fireflies
+    </a>
+  </footer>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

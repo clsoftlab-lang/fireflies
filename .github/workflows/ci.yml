@@ -1,0 +1,131 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  simulator:
+    name: Simulator tests (node --test)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Run simulator tests
+        run: |
+          if [ -d sim/tests ] && ls sim/tests/*.* >/dev/null 2>&1; then
+            node --test sim/tests
+          else
+            echo "sim/tests not present yet - skipping (guarded so CI stays green)."
+          fi
+
+  firmware:
+    name: Firmware tests (Python ${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Run firmware tests if present
+        run: |
+          if [ -d firmware/tests ] && ls firmware/tests/*.py >/dev/null 2>&1; then
+            python -m pip install --upgrade pip
+            pip install pytest numpy pyyaml
+            pytest firmware/tests
+          else
+            echo "firmware/tests not present yet - skipping (guarded so CI stays green)."
+          fi
+
+  sanity:
+    name: YAML / JSON / HTML sanity
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install PyYAML
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyyaml
+      - name: Parse all YAML, JSON and HTML files
+        run: |
+          python - <<'PY'
+          import glob, json, sys, html.parser
+          import yaml
+
+          errors = []
+
+          def walk(patterns):
+              files = []
+              for p in patterns:
+                  files += glob.glob(p, recursive=True)
+              return sorted(set(f for f in files if '/.git/' not in f and not f.startswith('.git/')))
+
+          # YAML
+          for f in walk(['**/*.yml', '**/*.yaml']):
+              try:
+                  with open(f, encoding='utf-8') as fh:
+                      list(yaml.safe_load_all(fh))
+              except Exception as e:
+                  errors.append(f"YAML  {f}: {e}")
+
+          # JSON
+          for f in walk(['**/*.json']):
+              try:
+                  with open(f, encoding='utf-8') as fh:
+                      json.load(fh)
+              except Exception as e:
+                  errors.append(f"JSON  {f}: {e}")
+
+          # HTML (well-formedness smoke test)
+          class P(html.parser.HTMLParser):
+              pass
+          for f in walk(['**/*.html', '**/*.htm']):
+              try:
+                  with open(f, encoding='utf-8') as fh:
+                      P().feed(fh.read())
+              except Exception as e:
+                  errors.append(f"HTML  {f}: {e}")
+
+          if errors:
+              print("Sanity check FAILED:")
+              for e in errors:
+                  print(" -", e)
+              sys.exit(1)
+          print("All YAML/JSON/HTML files parsed cleanly.")
+          PY
+
+  openscad:
+    name: OpenSCAD render smoke test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Render one hardware part if any .scad exists
+        run: |
+          scad=$(find hardware -name '*.scad' 2>/dev/null | head -n1)
+          if [ -n "$scad" ]; then
+            sudo apt-get update
+            sudo apt-get install -y openscad
+            echo "Rendering $scad"
+            openscad -o /tmp/part.stl "$scad"
+            test -s /tmp/part.stl
+          else
+            echo "No hardware/*.scad present yet - skipping (guarded so CI stays green)."
+          fi

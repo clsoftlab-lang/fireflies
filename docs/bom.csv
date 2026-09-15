@@ -1,0 +1,21 @@
+ref,group,part,choice_spec,qty,price_low_usd,price_high_usd,licence_or_notes,status
+U1,unit,Envelope (bell),Metallised-film micro-bubble ~5-8cm or biodegradable latex micro-balloon,1,0.20,1.00,Foil holds helium longer; latex breaks down better; 2cm is simulator-only,provisional
+U2,unit,Lift gas,Helium trimmed to near-neutral buoyancy,1,0,0,~1 g lift per litre displaced; see D1 for source,provisional
+U3,unit,Light,Micro-LED warm amber ~590nm (+ optional cool-white/blue tint),1,0.05,0.30,Amber matches fireflies; blue tint mimics spark colour,provisional
+U4,unit,Flash capacitor,Small ceramic/film capacitor for capacitor-boosted flash,1,0.05,0.20,Gives spark-like pop (spec 5.1) with no real spark,provisional
+U5,unit,Power,Smallest coin/film cell inside lift budget,1,0.10,0.50,Never fly a damaged cell,provisional
+U6,unit,Blink circuit,ATtiny-class microcontroller or discrete analog blinker,1,0.30,1.50,Firmware enables synchrony; analog just blinks,provisional
+U7,unit,Sync sensor (optional),Phototransistor,1,0.05,0.30,Sees neighbours flashes to fall into rhythm,provisional
+U8,unit,Tendrils (jellyfish form),3-8 light strands with a few micro-LEDs each,8,0.20,1.00,Must hang and sway; every milligram inside free-lift budget,provisional
+U9,unit,Carrier/attachment,Cellulose or paper LED carrier + light tether point,1,0.02,0.10,Biodegradable carrier preferred for free-release,provisional
+D1,dispenser,Helium source,Small helium cylinder + regulator,1,30,80,High-pressure; asphyxiant in enclosed spaces,provisional
+D2,dispenser,Controller,Raspberry Pi Pico or Arduino-class board,1,4,12,Runs fill/trim/test/release,provisional
+D3,dispenser,Fill valve,Micro servo or solenoid valve on helium line,1,3,15,Firmware closes at target free-lift,provisional
+D4,dispenser,Buoyancy balance,Load cell + HX711-class amplifier,1,3,8,Trims unit near neutral (F2),provisional
+D5,dispenser,LED self-test,Photodiode,1,0.20,1.00,Confirms one blink so no dead unit released,provisional
+D6,dispenser,Frame/magazine/release gate,3D-printed parts (PLA/PETG),1,2,8,OpenSCAD sources in hardware/ (CERN-OHL-P-2.0),provisional
+D7,dispenser,Start button/all-stop,Momentary button or handheld remote,1,1,10,Only live control: begin releasing / all-stop,provisional
+D8,dispenser,Wiring & misc,Dupont wire headers small fasteners,1,2,6,Per wiring diagram in hardware/,provisional
+C1,consumable,Fine tether line,Spools for default tethered mode,1,2,10,Retrievable,provisional
+C2,consumable,Recovery bags / log sheet,For counting,1,1,5,Released count must equal recovered count,provisional
+C3,consumable,Spares,Spare cells and envelopes,1,2,10,Never fly a damaged cell,provisional

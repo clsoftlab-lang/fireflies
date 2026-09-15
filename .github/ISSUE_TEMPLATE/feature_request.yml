@@ -1,0 +1,57 @@
+name: Feature or idea
+description: Suggest an improvement or a new idea for the simulator, hardware, firmware or docs. (한국어로 작성하셔도 됩니다.)
+title: "[Idea] "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the idea! Small ideas are welcome too, and so are first-time contributors and students.
+        Fireflies is gentle, safe, leave-no-trace art: ideas for any harmful use are out of scope.
+        English is fine; Korean is welcome.
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      multiple: true
+      options:
+        - Simulator
+        - Hardware - unit
+        - Hardware - dispenser
+        - Firmware
+        - Documentation / translation
+        - Community / process
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem or wish is behind this?
+      description: What would be better, prettier, clearer, or safer?
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: Your idea
+      description: What would you like to see? Sketches or links are welcome.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives you considered
+    validations:
+      required: false
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: I searched existing issues and discussions.
+          required: true
+        - label: This keeps Fireflies as gentle, safe, leave-no-trace art.
+          required: true
+        - label: If it changes behaviour, I understand the design spec may need updating too.
+          required: false

@@ -1,0 +1,71 @@
+name: Safety note
+description: Raise a safety concern about the design, guides, or a show - helium, batteries, airspace, wildlife, recovery. (한국어로 작성하셔도 됩니다.)
+title: "[Safety] "
+labels: ["safety"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for looking out for people, wildlife and the sky. Safety notes are welcome and taken
+        seriously. **If this is a security vulnerability** (for example a way to make the dispenser open the
+        helium valve or defeat the all-stop), report it privately via SECURITY.md instead.
+        **If someone was hurt**, please also file a show report and say so clearly. Remove personal information.
+  - type: dropdown
+    id: topic
+    attributes:
+      label: Topic
+      multiple: true
+      options:
+        - Airspace / aircraft / permits
+        - Helium (asphyxiant / cylinder handling)
+        - Batteries
+        - Crowds / roads / bystanders
+        - Wildlife / environment
+        - Recovery / leave no trace
+        - Flash / brightness
+        - Dispenser mechanism
+        - Documentation is unclear or wrong
+        - Other
+    validations:
+      required: true
+  - type: dropdown
+    id: severity
+    attributes:
+      label: How serious?
+      options:
+        - "Suggestion to make things safer"
+        - "Could cause a near miss"
+        - "Could cause harm"
+        - "Harm already happened"
+    validations:
+      required: true
+  - type: textarea
+    id: concern
+    attributes:
+      label: The concern
+      description: What is unsafe or could go wrong, and in what situation?
+    validations:
+      required: true
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: Suggested fix (optional)
+      description: A guide change, a design change, or a different default.
+    validations:
+      required: false
+  - type: input
+    id: where
+    attributes:
+      label: Where does this apply?
+      description: A spec section, a guide, a file, or a real show setup.
+    validations:
+      required: false
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: This is not a security vulnerability (those go to SECURITY.md).
+          required: true
+        - label: I removed personal information from this report.
+          required: true

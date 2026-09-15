@@ -1,0 +1,89 @@
+name: Bug report
+description: Something does not work as the spec, the simulator, or the guides describe. (한국어로 작성하셔도 됩니다.)
+title: "[Bug] "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting. English is fine; Korean is welcome too.
+        **Security or safety-security issues do not go here** — use the private process in SECURITY.md.
+        Remove personal information (faces, exact locations, phone numbers) from anything you attach.
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      multiple: true
+      options:
+        - Simulator - drift / wind
+        - Simulator - sync / blinking
+        - Simulator - controls / accessibility / performance
+        - Firmware - unit blink + sync
+        - Firmware - dispenser controller
+        - Hardware - unit (balloon / LED / tendrils)
+        - Hardware - dispenser (valve / load cell / release)
+        - Documentation
+        - CI / tooling
+        - Other
+    validations:
+      required: true
+  - type: dropdown
+    id: safety
+    attributes:
+      label: Could this affect safety at a real show?
+      description: For example the helium valve, buoyancy trim, LED self-test, or the all-stop.
+      options:
+        - "No"
+        - "Yes - it could affect a real flight"
+        - "Not sure"
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect?
+      description: If you can, name the spec section or guide that describes the expected behaviour.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open the simulator with ...
+        2. Set coupling strength to ...
+        3. ...
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: Commit (`git rev-parse --short HEAD`) or release, and for the simulator your browser.
+    validations:
+      required: false
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs / console output
+      description: Browser console, pytest output, or dispenser logs. Remove personal data.
+      render: shell
+    validations:
+      required: false
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: I searched existing issues.
+          required: true
+        - label: This is not a security vulnerability (those go to SECURITY.md).
+          required: true
+        - label: I removed personal information from this report.
+          required: true
